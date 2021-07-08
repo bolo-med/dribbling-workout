@@ -2,15 +2,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/app/app.component';
+
+import { FormsModule } from '@angular/forms';
+import { PocetnaComponent } from './components/pocetna/pocetna.component';
+import { TreningComponent } from './components/trening/trening.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PocetnaComponent,
+    TreningComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

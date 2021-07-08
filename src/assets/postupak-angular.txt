@@ -1,0 +1,138 @@
+Naredbe se kucaju u cmd-u.
+
+npm install -g @angular/cli (instalira Angular na racunar)
+
+---------------------------
+
+ng new naziv-projekta (kreira projekat; folder u kojem je sve)
+
+... add Angular rooting? Yes
+
+... stylesheet format... SCSS
+
+---------------------------------------------------
+
+cd naziv-projekta (predjemo u projekat - folder)
+
+ng serve (pokrenemo Angular aplikaciju)
+
+------------------------------
+
+U browseru: localhost:4200
+
+----------------------------------------
+
+Ctrl + C (prekidamo izvrsavanje)
+
+----------------------------------------
+
+ng (provjera je li Angular instaliran na racunar)
+
+ng help
+
+ng --version
+
+-----------------------------------------------------
+
+Pokretanje aplikacije iz VSC:
+
+U Terminalu (izabrati Command Prompt):
+
+ng serve ili npm start
+
+-----------------------------------------------------
+
+(da bismo bolje organizovali kod)
+
+Unutar foldera app, kreiramo components/app, pa u njega prebacimo 4 fajla koji cine komponentu app (app.component: ts, html, scss, spec.ts).
+
+Promijenimo putanju u fajlu app.module.ts, na ./components/app/app.component
+
+------------------------------------------------------------
+
+(instaliramo bootstrap i jquery; bootstrap ne moze bez jqueryja)
+
+npm install --save bootstrap jquery
+
+(stare verzije; nove mi ne rade)
+npm install bootstrap@4.5.3
+npm install jquery@3.5.1
+
+------------------------------------------
+
+(da ukljucimo fajlove za jquery i bootstrap)
+
+Odemo u fajl: src/styles.scss
+
+Upisemo:
+@import './../node_modules/bootstrap/dist/css/bootstrap.css';
+
+Odemo u fajl: angular.json
+
+U polje (niz) scripts upisemo:
+
+"scripts": [
+	"node_modules/jquery/dist/jquery.js",
+	"node_modules/bootstrap/dist/js/bootstrap.js"
+]
+
+----------------------------------------------------------------------
+
+(Da iskoristimo navigacionu liniju iz primjera na bootstrapovom sajtu. 
+Primjeri ne rade na verziji bootstrapa 5.x)
+
+https://getbootstrap.com/docs/4.5/examples/jumbotron/
+
+1xD / View Page Source
+
+Kopiramo citav <nav></nav>
+
+Odemo u fajl: src/app/components/app/app.component.html
+
+Izbrisemo sve, pa postavimo <nav>, koji smo prethodno kopirali.
+
+--------------------------------------------------------------------------
+
+(da napravimo novu komponentu)
+
+ng generate component components/naziv-komponente
+
+-----------------------------------------------------------------
+
+- Da bismo koristili ngModel:
+
+Otvorimo: app.module.ts
+
+Upisemo: import { FormsModule } from '@angular/forms';
+
+U polje imports (to je niz), dodamo element: FormsModule
+
+--------------------------------------------------------------
+
+(da bismo koristili AJAX pozive u Angular aplikacji - povezivanje Angulara i Node.js-a)
+
+Otvorimo, u Angularu: app.module.ts
+Upisemo: import { HttpClientModule } from '@angular/common/http';
+U polje imports (to je niz), dodamo element: HttpClientModule
+
+-------------------------------------------------------------------------------------------
+
+(da napravimo servis)
+
+ng generate service services/imeServisa
+
+(napravice servis, koji se zove imeServisa, i koji se nalazi u folderu services, a sve to ce biti smjesteno u folder app)
+
+------------------------------------------------
+
+(za file upload)
+
+npm install --save ng2-file-upload
+
+U src/app/app.modules.ts:
+import { FileUploadModule } from 'ng2-file-upload';
+
+U promjenljivu (niz) imports, dopisemo FileUploadModule
+
+------------------------------------------------------------
+
