@@ -121,7 +121,7 @@ export class TreningComponent implements OnInit {
 
     trening.vjezbe.push(new Vjezba('betweenBothLegs', 'Between both legs', 
                                    'Probacujte loptu kroz noge. Lopta mora samo jednom ta odskoci od zemlju.', 
-                                   30, '10f8.png'));
+                                   30, '11bbl.png'));
 
     // odmor
 

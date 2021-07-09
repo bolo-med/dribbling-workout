@@ -1,7 +1,30 @@
-<div class="pt-30-px"></div>
+<div class="container-fluid">
+    <div class="pt-30-px"></div>
+    <div class="row">
+        <div class="col-lg-3">
+            <app-opisi-vjezbi [opis]="trenutnaVjezba.opis"></app-opisi-vjezbi>
+        </div>
+        <div class="col-lg-6">
 
-<p class="display-4 ctxt">{{trenutnaVjezba.naslov}}</p>
+            <p class="display-4 ctxt">{{trenutnaVjezba.naslov}}</p>
 
-<img class="img-fluid col-sm" alt='nema slike' [src]="'assets/slike/' + trenutnaVjezba.slika">
+            <img class="img-fluid col-sm" alt='nema slike' [src]="'assets/slike/' + trenutnaVjezba.slika">
 
-Vjezba - {{trenutnaVjezba.naslov}}: {{protekloVrijemeVjezbe}}/{{trenutnaVjezba.trajanje}}
+            <div class="progress" style="height: 30px;">
+                <div class="progress-bar bg-warning" 
+                     role="progressbar" 
+                     [ngStyle]="{'width': (protekloVrijemeVjezbe/trenutnaVjezba.trajanje)*100 + '%'}" 
+                     [attr.aria-valuenow]="protekloVrijemeVjezbe" 
+                     aria-valuemin="0" 
+                     [attr.aria-valuemax]="trenutnaVjezba.trajanje"></div>
+            </div>
+
+            <p class="txt15e ctxt">Do kraja vježbe: {{trenutnaVjezba.trajanje - protekloVrijemeVjezbe}}</p>
+
+        </div>
+        <div class="col-lg-3">
+            <app-video-plejer></app-video-plejer>
+        </div>
+    </div>
+</div>
+

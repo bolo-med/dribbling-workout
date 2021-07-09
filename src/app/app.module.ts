@@ -7,12 +7,16 @@ import { AppComponent } from './components/app/app.component';
 import { FormsModule } from '@angular/forms';
 import { PocetnaComponent } from './components/pocetna/pocetna.component';
 import { TreningComponent } from './components/trening/trening.component';
+import { OpisiVjezbiComponent } from './components/opisi-vjezbi/opisi-vjezbi.component';
+import { VideoPlejerComponent } from './components/video-plejer/video-plejer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PocetnaComponent,
-    TreningComponent
+    TreningComponent,
+    OpisiVjezbiComponent,
+    VideoPlejerComponent
   ],
   imports: [
     BrowserModule,
