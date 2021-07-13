@@ -125,6 +125,12 @@ ng generate service services/imeServisa
 
 ------------------------------------------------
 
+(da napravimo pipe)
+
+ng generate pipe pipes/naziv-pajpa
+
+------------------------
+
 (za file upload)
 
 npm install --save ng2-file-upload

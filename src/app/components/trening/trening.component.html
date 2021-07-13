@@ -6,7 +6,9 @@
         </div>
         <div class="col-lg-6">
 
-            <p class="display-4 ctxt">{{trenutnaVjezba.naslov}}</p>
+            <p class="preostalo">Do kraja treninga: {{preostaloVrijemeTreninga | sekundeFormat}}</p>
+
+            <p class="naslov display-4">{{trenutnaVjezba.naslov}}</p>
 
             <img class="img-fluid col-sm" alt='nema slike' [src]="'assets/slike/' + trenutnaVjezba.slika">
 
@@ -19,11 +21,16 @@
                      [attr.aria-valuemax]="trenutnaVjezba.trajanje"></div>
             </div>
 
-            <p class="txt15e ctxt">Do kraja vježbe: {{trenutnaVjezba.trajanje - protekloVrijemeVjezbe}}</p>
+            <p class="preostalo">Do kraja {{trenutnaVjezba.nazivID == odmor.nazivID ? 'odmora' : 'vježbe'}}: 
+                                                    {{(trenutnaVjezba.trajanje - protekloVrijemeVjezbe) | sekundeFormat}}</p>
+
+            <p class="preostalo" *ngIf="trenutnaVjezba.nazivID == odmor.nazivID">
+                Sledeća vježba: {{trening.vjezbe[indeksTrenutneVjezbe + 1].naslov}}
+            </p>
 
         </div>
         <div class="col-lg-3">
-            <app-video-plejer></app-video-plejer>
+            <app-video-plejer [snimci]="trenutnaVjezba.snimci"></app-video-plejer>
         </div>
     </div>
 </div>

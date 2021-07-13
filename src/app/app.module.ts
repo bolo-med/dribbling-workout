@@ -9,6 +9,7 @@ import { PocetnaComponent } from './components/pocetna/pocetna.component';
 import { TreningComponent } from './components/trening/trening.component';
 import { OpisiVjezbiComponent } from './components/opisi-vjezbi/opisi-vjezbi.component';
 import { VideoPlejerComponent } from './components/video-plejer/video-plejer.component';
+import { SekundeFormatPipe } from './pipes/sekunde-format.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { VideoPlejerComponent } from './components/video-plejer/video-plejer.com
     PocetnaComponent,
     TreningComponent,
     OpisiVjezbiComponent,
-    VideoPlejerComponent
+    VideoPlejerComponent,
+    SekundeFormatPipe
   ],
   imports: [
     BrowserModule,
