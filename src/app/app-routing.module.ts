@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { KontejnerTtzComponent } from './components/kontejner-ttz/kontejner-ttz.component';
 import { PocetnaComponent } from './components/pocetna/pocetna.component';
-import { TreningComponent } from './components/trening/trening.component';
 
 
 const routes: Routes = [
@@ -11,7 +11,8 @@ const routes: Routes = [
   },
   {
     path: 'trening',
-    component: TreningComponent
+    component: KontejnerTtzComponent
+    //component: TreningComponent
   }
 ];
 

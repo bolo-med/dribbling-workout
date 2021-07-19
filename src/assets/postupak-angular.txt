@@ -125,11 +125,17 @@ ng generate service services/imeServisa
 
 ------------------------------------------------
 
-(da napravimo pipe)
+(da napravimo pajp)
 
 ng generate pipe pipes/naziv-pajpa
 
 ------------------------
+
+(da napravimo direktivu; sluzi za DOM manipulaciju)
+
+ng generate directive directives/naziv-direktive
+
+--------------------------------------
 
 (za file upload)
 

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Trening } from '../../models/Trening';
 import { Vjezba } from 'src/app/models/Vjezba';
+import { TokVjezbeEvent } from 'src/app/models/TokVjezbeEvent';
+import { PromjenaVjezbeEvent } from 'src/app/models/PromjenaVjezbeEvent';
 
 @Component({
   selector: 'app-trening',
@@ -15,40 +17,61 @@ export class TreningComponent implements OnInit {
   indeksTrenutneVjezbe: number;
   trenutnaVjezba: Vjezba;
   protekloVrijemeVjezbe: number;
+  intervalID: number;
+  treningPauziran: boolean;
+
+  @Output() vjezbaPauzirana: EventEmitter<number> = new EventEmitter<number>();
+  @Output() vjezbaNastavljena: EventEmitter<number> = new EventEmitter<number>();
+  @Output() vjezbaTok: EventEmitter<TokVjezbeEvent> = new EventEmitter<TokVjezbeEvent>();
+  @Output() vjezbaPromjena: EventEmitter<PromjenaVjezbeEvent> = new EventEmitter<PromjenaVjezbeEvent>();
+  @Output() treningPocetak: EventEmitter<Trening> = new EventEmitter<Trening>();
+  @Output() treningKraj: EventEmitter<Trening> = new EventEmitter<Trening>();
 
   constructor() { }
 
   ngOnInit(): void {
     this.trening = this.kreirajTrening();
     this.odmor = new Vjezba('odmor', 'Odmorite se', 'Kratak predah između vježbi.', this.trening.trajanjeOdmora, 'odmor.png');
-    this.start();
+    this.startDefinisane();
+  }
+
+  startDefinisane() {
+    if ((this.trening !== undefined) && (this.odmor !== undefined)) {
+      this.start();
+    }
+    else {
+      return this.startDefinisane();
+    }
   }
 
   start() {
     this.preostaloVrijemeTreninga = this.trening.trajanjeTreninga();
     this.indeksTrenutneVjezbe = 0;
     this.zapocniVjezbu(this.trening.vjezbe[this.indeksTrenutneVjezbe]);
+    this.treningPocetak.emit(this.trening);
   }
 
   zapocniVjezbu(vjezba: Vjezba): void {
     this.trenutnaVjezba = vjezba;
     this.protekloVrijemeVjezbe = 0;
-    this.pratiVrijeme();
+    this.pratiVrijemeVjezbe();
   }
 
-  pratiVrijeme(): void {
+  pratiVrijemeVjezbe(): void {
     // window.setInterval
-    const interval = setInterval(() => {
+    this.intervalID = setInterval(() => {
       if (this.protekloVrijemeVjezbe >= this.trenutnaVjezba.trajanje) {
-        clearInterval(interval);
-        const sledecaVjezba: Vjezba = this.dajSledecuVjezbu(this.trenutnaVjezba);
+        clearInterval(this.intervalID);
+        const sledecaVjezba: Vjezba = this.dajSledecuVjezbu();
         if (sledecaVjezba) {
           if (sledecaVjezba !== this.odmor) {
             this.indeksTrenutneVjezbe++;
           }
           this.zapocniVjezbu(sledecaVjezba);
+          this.vjezbaPromjena.emit(new PromjenaVjezbeEvent(sledecaVjezba, this.dajSledecuVjezbu()));
         }
         else {
+          this.treningKraj.emit(this.trening);
           console.log('Kraj treninga!');
         }
         // return; // radi i bez ovog
@@ -56,13 +79,17 @@ export class TreningComponent implements OnInit {
       else {
         this.protekloVrijemeVjezbe++;
         this.preostaloVrijemeTreninga--;
+        this.vjezbaTok.emit(new TokVjezbeEvent(this.trenutnaVjezba, 
+                                               this.protekloVrijemeVjezbe, 
+                                               this.trenutnaVjezba.trajanje - this.protekloVrijemeVjezbe, 
+                                               this.preostaloVrijemeTreninga));
       }
     }, 200);
   }
 
-  dajSledecuVjezbu(trenutna: Vjezba): Vjezba {
+  dajSledecuVjezbu(): Vjezba {
     let sledeca: Vjezba = null;
-    if (trenutna === this.odmor) {
+    if (this.trenutnaVjezba === this.odmor) {
       sledeca = this.trening.vjezbe[this.indeksTrenutneVjezbe + 1];
     }
     else if (this.indeksTrenutneVjezbe === 5 || 
@@ -74,6 +101,33 @@ export class TreningComponent implements OnInit {
       sledeca = this.trening.vjezbe[this.indeksTrenutneVjezbe + 1];
     }
     return sledeca;
+  }
+
+  pauziraj() {
+    clearInterval(this.intervalID);
+    this.treningPauziran = true;
+    this.vjezbaPauzirana.emit(this.indeksTrenutneVjezbe);
+  }
+
+  nastavi() {
+    this.pratiVrijemeVjezbe();
+    this.treningPauziran = false;
+    this.vjezbaNastavljena.emit(this.indeksTrenutneVjezbe);
+  }
+
+  pauzirajNastavi() {
+    if (this.treningPauziran) {
+      this.nastavi();
+    }
+    else {
+      this.pauziraj();
+    }
+  }
+
+  pritisnutTaster(d: KeyboardEvent) {
+    if (d.key === 'p' || d.key === 'P') {
+      this.pauzirajNastavi();
+    }
   }
 
   kreirajTrening(): Trening {
@@ -113,7 +167,7 @@ export class TreningComponent implements OnInit {
     trening.vjezbe.push(new Vjezba('crossover', 'Crossover', 
                                    'Prebacujte loptu iz jedne u drugu ruku. ' + 
                                    'Prilikom prebacivanja, lopta treba da odskoči od pod, jednom.', 
-                                   30, '08c.png', '', ['teqk-UDPCrc?start=234;&mute=1']));
+                                   30, '08c.png', '', ['teqk-UDPCrc?start=234;&mute=1', 'aAdioIs17LM?&mute=1']));
 
     // odmor
 
@@ -132,11 +186,11 @@ export class TreningComponent implements OnInit {
 
     // odmor
 
-    trening.vjezbe.push(new Vjezba('winfshieldWiperRightHand', 'Winfshield wiper right hand', 
+    trening.vjezbe.push(new Vjezba('windshieldWiperRightHand', 'Windshield wiper right hand', 
                                    'Tapkajte loptu desnom rukom, lijevo-desno. Lopta odskace do visine koljena.', 
                                    30, '12wwrh.png', '', ['teqk-UDPCrc?start=412;&mute=1']));
     
-    trening.vjezbe.push(new Vjezba('winfshieldWiperLeftHand', 'Winfshield wiper left hand', 
+    trening.vjezbe.push(new Vjezba('windshieldWiperLeftHand', 'Windshield wiper left hand', 
                                    'Tapkajte loptu lijevom rukom, lijevo-desno. Lopta odskace do visine koljena.', 
                                    30, '13wwlh.png', '', ['teqk-UDPCrc?start=442;&mute=1']));
 

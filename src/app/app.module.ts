@@ -10,6 +10,9 @@ import { TreningComponent } from './components/trening/trening.component';
 import { OpisiVjezbiComponent } from './components/opisi-vjezbi/opisi-vjezbi.component';
 import { VideoPlejerComponent } from './components/video-plejer/video-plejer.component';
 import { SekundeFormatPipe } from './pipes/sekunde-format.pipe';
+import { ZvucnaSignalizacijaDirective } from './directives/zvucna-signalizacija.directive';
+import { TreningZvukComponent } from './components/trening-zvuk/trening-zvuk.component';
+import { KontejnerTtzComponent } from './components/kontejner-ttz/kontejner-ttz.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { SekundeFormatPipe } from './pipes/sekunde-format.pipe';
     TreningComponent,
     OpisiVjezbiComponent,
     VideoPlejerComponent,
-    SekundeFormatPipe
+    SekundeFormatPipe,
+    ZvucnaSignalizacijaDirective,
+    TreningZvukComponent,
+    KontejnerTtzComponent
   ],
   imports: [
     BrowserModule,
