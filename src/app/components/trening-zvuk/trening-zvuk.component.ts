@@ -43,7 +43,7 @@ export class TreningZvukComponent implements OnInit {
   }
 
   onTokVjezbe(tok: TokVjezbeEvent) {
-    if (tok.protekloVrijeme === Math.floor(tok.vjezba.trajanje / 2) && (tok.vjezba.nazivID === 'odmor')) {
+    if (tok.protekloVrijeme === Math.floor(tok.vjezba.trajanje / 2) && (tok.vjezba.nazivID !== 'odmor')) {
       this.halfway.pusti();
     }
     else if (tok.preostaloVrijeme === 3) {
@@ -53,8 +53,9 @@ export class TreningZvukComponent implements OnInit {
 
   onPromjenaVjezbe(mijenjanje: PromjenaVjezbeEvent) {
     // this.zvukSledeceVjezbe = mijenjanje.sledeca.zvuk;
-    setTimeout(() => {this.next.pusti()}, 2000);
+    //setTimeout(() => {this.next.pusti()}, 1000);
     // setTimeout(() => {this.naslovVjezbe.pusti()}, 3000);
+    this.next.pusti();
   }
 
 }

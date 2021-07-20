@@ -1,9 +1,9 @@
-<app-trening (vjezbaPauzirana)="plejer.stop()" 
-             (vjezbaNastavljena)="plejer.nastavi()" 
-             (vjezbaTok)="plejer.onTokVjezbe($event)" 
-             (vjezbaPromjena)="plejer.onPromjenaVjezbe($event)" 
-             (treningPocetak)="plejer.nastavi()" 
-             (treningKraj)="plejer.stop()"></app-trening>
+<app-trening (vjezbaPauzirana)="tz.stop()" 
+             (vjezbaNastavljena)="tz.nastavi()" 
+             (vjezbaTok)="tz.onTokVjezbe($event)" 
+             (vjezbaPromjena)="tz.onPromjenaVjezbe($event)" 
+             (treningPocetak)="tz.nastavi()" 
+             (treningKraj)="tz.stop()"></app-trening>
 
-<app-trening-zvuk #plejer></app-trening-zvuk>
+<app-trening-zvuk #tz></app-trening-zvuk>
 

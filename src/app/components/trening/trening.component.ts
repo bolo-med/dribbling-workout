@@ -32,16 +32,7 @@ export class TreningComponent implements OnInit {
   ngOnInit(): void {
     this.trening = this.kreirajTrening();
     this.odmor = new Vjezba('odmor', 'Odmorite se', 'Kratak predah između vježbi.', this.trening.trajanjeOdmora, 'odmor.png');
-    this.startDefinisane();
-  }
-
-  startDefinisane() {
-    if ((this.trening !== undefined) && (this.odmor !== undefined)) {
-      this.start();
-    }
-    else {
-      return this.startDefinisane();
-    }
+    this.start();
   }
 
   start() {
@@ -84,7 +75,7 @@ export class TreningComponent implements OnInit {
                                                this.trenutnaVjezba.trajanje - this.protekloVrijemeVjezbe, 
                                                this.preostaloVrijemeTreninga));
       }
-    }, 200);
+    }, 1000);
   }
 
   dajSledecuVjezbu(): Vjezba {

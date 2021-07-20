@@ -1,28 +1,16 @@
-# DribblingWorkout
+## 10-minutni košarkaški trening za dribling
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
+Trening se sastoji od nekoliko vježbi, različitog trajanja, i tri pauze. Korisnik može da pauzira i nastavlja trening, i da prati preostalo vrijeme treninga, kao i preostalo vrijeme vježbe uz progres bar.
 
-## Development server
+Na glavnom dijelu je prikazan naslov trenutne vježbe, ilustracija (slika) izvođenja vježbe, a u toku pauze je prikazan naslov sledeće vježbe. Sa strana su opis vježbe i video snimci izvođenja vježbe.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Tokom treninga se čuje odgovarajuća zvučna signalizacija.
 
-## Code scaffolding
+![](slika.PNG)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**PROBLEM**: U komponenti *TreningComponent* se odmah aktivira događaj, posle koga se poziva f-ja iz komponente *TreningZvukComponent*, i to prije nego što se inicijalizuju njene promenljive.
 
-## Build
+>ERROR TypeError: Cannot read property 'pusti' of undefined\
+>   at TreningZvukComponent.nastavi (trening-zvuk.component.ts:33)\
+>   at KontejnerTtzComponent_Template_app_trening_treningPocetak_0_listener (kontejner-ttz.component.html:5)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-"# dribbling-workout" 
