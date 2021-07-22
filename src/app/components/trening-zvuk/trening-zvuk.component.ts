@@ -14,8 +14,8 @@ export class TreningZvukComponent implements OnInit {
   @ViewChild('halfway') private halfway: ZvucnaSignalizacijaDirective;
   @ViewChild('priKraju') private priKraju: ZvucnaSignalizacijaDirective;
   @ViewChild('next') private next: ZvucnaSignalizacijaDirective;
-  // @ViewChild('naslovVjezbe') private naslovVjezbe: ZvucnaSignalizacijaDirective;
-  // zvukSledeceVjezbe: string;
+  @ViewChild('naslovVjezbe') private naslovVjezbe: ZvucnaSignalizacijaDirective;
+  zvukSledeceVjezbe: string = '01attr.mp3';
 
   constructor() { }
 
@@ -30,7 +30,8 @@ export class TreningZvukComponent implements OnInit {
   }
 
   nastavi() {
-    this.tings.pusti();
+    this.tings.pusti(); // Ovako ne radi. Pokusa da pokrene f-ju 'pusti()' prije nego sto je 'tings' inicijalizovano.
+
     if (this.halfway.trenutnoVrijeme > 0 && !this.halfway.jeLiZavrseno) {
       this.halfway.pusti();
     }
@@ -49,13 +50,17 @@ export class TreningZvukComponent implements OnInit {
     else if (tok.preostaloVrijeme === 3) {
       this.priKraju.pusti();
     }
+    else if ((tok.preostaloVrijeme < 1) && (tok.preostaloVrijemeTreninga > 2)) {
+      this.next.pusti();
+    }
+    else if (tok.vjezba.nazivID === 'aroundToTheRight' && tok.protekloVrijeme === 1) {
+      this.naslovVjezbe.pusti();
+    }
   }
 
   onPromjenaVjezbe(mijenjanje: PromjenaVjezbeEvent) {
-    // this.zvukSledeceVjezbe = mijenjanje.sledeca.zvuk;
-    //setTimeout(() => {this.next.pusti()}, 1000);
-    // setTimeout(() => {this.naslovVjezbe.pusti()}, 3000);
-    this.next.pusti();
+    this.zvukSledeceVjezbe = mijenjanje.trenutna.zvuk;
+    setTimeout(() => {this.naslovVjezbe.pusti()}, 1000);
   }
 
 }

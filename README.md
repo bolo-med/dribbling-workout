@@ -10,7 +10,5 @@ Tokom treninga se čuje odgovarajuća zvučna signalizacija.
 
 **PROBLEM**: U komponenti *TreningComponent* se odmah aktivira događaj, posle koga se poziva f-ja iz komponente *TreningZvukComponent*, i to prije nego što se inicijalizuju njene promenljive.
 
->ERROR TypeError: Cannot read property 'pusti' of undefined\
->   at TreningZvukComponent.nastavi (trening-zvuk.component.ts:33)\
->   at KontejnerTtzComponent_Template_app_trening_treningPocetak_0_listener (kontejner-ttz.component.html:5)
+![](slika-greska.PNG)
 
