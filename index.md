@@ -2,6 +2,9 @@
 
 Trening se sastoji od 10-ak različitih vježbi, sa pauzama između. Prikazuje se opis za svaku vjezbu, ilustracija i video-snimak izvođenja. Moguće je pauzirati trening. Postoji zvučna signalizacija za naslov svake vježbe, sredinu i kraj vjezbe, kao i za svaku proteklu sekundu.
 
+![Slika aplikacije](/docs/assets/images/slika.png)
+![Slika aplikacije](/docs/assets/images/slika2.png)
+
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
