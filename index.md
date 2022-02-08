@@ -1,8 +1,6 @@
-## Welcome to GitHub Pages
+## Košarkaški trening za unapređenje driblinga
 
-You can use the [editor on GitHub](https://github.com/bolo-med/dribbling-workout/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Trening se sastoji od 10-ak različitih vježbi, sa pauzama između. Prikazuje se opis za svaku vjezbu, ilustracija i video-snimak izvođenja. Moguće je pauzirati trening. Postoji zvučna signalizacija za naslov svake vježbe, sredinu i kraj vjezbe, kao i za svaku proteklu sekundu.
 
 ### Markdown
 
